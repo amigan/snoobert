@@ -1,4 +1,4 @@
-module github.com/vartanbeno/go-reddit/v2
+module github.com/amigan/snoobert
 
 go 1.15
 
