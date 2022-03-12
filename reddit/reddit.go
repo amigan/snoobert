@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/google/go-querystring/query"
+	"golang.org/x/oauth2"
 )
 
 const (
@@ -96,6 +97,7 @@ type Client struct {
 	Wiki       *WikiService
 
 	applicationOnlyOAuth bool
+	tknSource oauth2.TokenSource
 
 	onRequestCompleted RequestCompletionCallback
 }

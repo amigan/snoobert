@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+
+
+	"golang.org/x/oauth2"
 )
 
 // Opt is used to further configure a client upon initialization.
@@ -61,6 +64,13 @@ func WithTokenURL(u string) Opt {
 func WithApplicationOnlyOAuth(o bool) Opt {
 	return func(c *Client) error {
 		c.applicationOnlyOAuth = o
+		return nil
+	}
+}
+
+func WithOAuthTokenSource(tkn oauth2.TokenSource) Opt {
+	return func(c *Client) error {
+		c.tknSource = tkn
 		return nil
 	}
 }

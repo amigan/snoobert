@@ -60,12 +60,15 @@ func (s *oauthTwoLeggedTokenSource) Token() (*oauth2.Token, error) {
 	return s.config.Token(s.ctx)
 }
 
+
 func oauthTransport(client *Client) http.RoundTripper {
 	httpClient := &http.Client{Transport: client.client.Transport}
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, httpClient)
 
 	var tokenSource oauth2.TokenSource
-	if client.applicationOnlyOAuth {
+	if client.tknSource != nil {
+		tokenSource = client.tknSource
+	} else if client.applicationOnlyOAuth {
 		tokenSource = &oauthTwoLeggedTokenSource{
 			ctx: ctx,
 			config: &clientcredentials.Config{
